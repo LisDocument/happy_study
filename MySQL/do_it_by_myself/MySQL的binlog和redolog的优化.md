@@ -45,7 +45,7 @@ redolog 存在可能有三种状态
 - 写到磁盘（write），但是没有持久化（fsync），物理上是在文件系统的page cache里面，也就是黄色部分
 - 持久化到磁盘，对应的是hard disk，即绿色部分
 
-日志写道redo log buffer是很快的，write到page cache也差不多，但是持久化到磁盘的速度会比较慢。
+日志写到redo log buffer是很快的，write到page cache也差不多，但是持久化到磁盘的速度会比较慢。
 
 为了控制redo log的写入策略，InnoDB提供了**innodb_flush_log_at_trx_commit**参数
 
@@ -60,7 +60,7 @@ redolog 存在可能有三种状态
 除了后台线程，还有场景会触发事务redolog写入到磁盘
 
 1. redologbuffer占用的空间打到**innodb_log_buffer_size**一半的时候，后台线程会主动写盘（写盘只是write，并没有fsync）
-2. 并行的事务提交的时候，顺便把这个事务redologbuffer持久化到磁盘。<u>假如一个事务A执行到一般，已经写了一些redolog到buffer中，这时候另外一个线程的事务B提交，如果innodb_flush_log_at_trx_commit设置的是1，那么按照这个参数的逻辑，B要把所有redologbuffer的日志全部持久化到磁盘，这时候会顺带Aredologbuffer的日志一起持久化</u>
+2. 并行的事务提交的时候，顺便把这个事务redologbuffer持久化到磁盘。<u>假如一个事务A执行到一半，已经写了一些redolog到buffer中，这时候另外一个线程的事务B提交，如果innodb_flush_log_at_trx_commit设置的是1，那么按照这个参数的逻辑，B要把所有redologbuffer的日志全部持久化到磁盘，这时候会顺带A的redologbuffer的日志一起持久化</u>
 
 > ps:时序上redo log先prepare，再binlog，然后redo log commit
 
