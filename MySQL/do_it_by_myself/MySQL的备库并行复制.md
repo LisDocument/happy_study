@@ -123,7 +123,7 @@
 
 添加了一个新的并行复制策略，给予WRITESET的并行复制。
 
-相应添加一个参数binlog-transaction-dependency-tracking，用来控制是否启用新策略。
+相应添加一个参数**binlog-transaction-dependency-tracking**，用来控制是否启用新策略。
 
 - COMMIT_ORDER，表示使用5.7的并行策略
 - WRITESET，表示的是对于事务涉及更新的每一行，计算这一行的hash值，组成集合writeset，如果两个事务没有操作相同的行，他们的writeset没有交集，就可以并行
@@ -136,3 +136,11 @@
 - 由于备库的分发策略不依赖于binlog，因此binlog不限制格式。
 
 当然对于<u>表上没主键</u>和<u>外键约束</u>的场景，WRITESET策略也没法并行，会暂时退化成单线程模型
+
+### 问题
+
+如果主库是单线程压力模式，那么从库追主库的过程，**binlog-transaction-dependency-tracking**应该选用什么参数
+
+- COMMIT_ORDER：由于主库是压力模式，每个事务的commit_id都是不用的，那么设置为这个模式，从库也是单线程执行。
+- WRITESET_SESSION：备库在应用日志的时候，同一个线程的日志必须与主库执行的先后顺序相同，主库单线程压力下也会退化成单线程复制模式
+- WRITESET
