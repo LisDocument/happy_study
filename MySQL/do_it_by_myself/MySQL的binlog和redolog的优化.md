@@ -1,6 +1,6 @@
 # MySQL对binlog和redolog的优化（对照MySQL的更新加强篇）
 
-[MySQL的更新]( MySQL的更新.md)
+[MySQL的更新](MySQL的更新.md)
 
 ## binlog的写入机制
 
