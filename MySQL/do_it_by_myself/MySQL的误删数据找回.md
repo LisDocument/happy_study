@@ -10,7 +10,7 @@ Flashback恢复数据的原理，是修改binlog的内容，拿回库里重放�
 
 1. 对insert语句，对应的binlog event类型是Write_rows event，把它改成Delete_rows event即可。
 2. 同理，对于delete语句，将Delete_rows event 改为Write_rows event；
-3. 如果是Update_rows的话，binlog记录了数据行修改前后的值，对调这两个的位置即可
+3. 如果是Update_rows的话，binlog记录了数d据行修改前后的值，对调这两个的位置即可
 
 如果不是单事务的话，在Flashback工具解析binlog后，逆序执行恢复操作，具体恢复操作可参照单个事务的操作。
 

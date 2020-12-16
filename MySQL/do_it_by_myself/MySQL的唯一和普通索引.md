@@ -24,7 +24,7 @@ change buffer时可以持久化的数据，在内存中有拷贝，也会被写�
 - 但是对于唯一索引来说，所有的更新操作都要先判断这个操作是否违反唯一性约束。插入数据的时候，就必须要要判断表中是否存在对应值的记录。这必须要将数据读入内存才能判断了。如果已经读入了，那直接更新内存会更快，就没必要使用change buffer了。
 - 普通索引正常可用
 
-change buffer用的时buffer pool里的内存，无法无限增大。change buffer的大小，可以通过**innodb_change_buffer_max_size**来动态设置。这个参数设置为50的时候，表示change buffer的大小最多只能占用buffer pool的50%
+change buffer用的时buffer pool里的内存，无法无限增大。change buffer的大小，可以通过**innodb_change_buffer_max_size**来动态设置。这个参数设置为50的时候，表示change buffer的大小w最多只能占用buffer pool的50%
 
 倘若我们要更新一个记录的时候
 

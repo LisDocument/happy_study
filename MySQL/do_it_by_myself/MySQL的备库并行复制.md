@@ -116,8 +116,8 @@
 
 在5.7并行复制策略中，使用binglog组提交的配置参数，可以用来制造更多的同时处于prepare的事务，增加了备库复制的并行度。
 
-- binlog_group_commit_sync_delay：延迟多少秒调用fsync
-- binlog_group_commit_sync_no_delay_count：累计多少次调用fsync
+- **binlog_group_commit_sync_delay**：延迟多少秒调用fsync
+- **binlog_group_commit_sync_no_delay_count**：累计多少次调用fsync
 
 ### MySQL 5.7.22的并行复制策略
 

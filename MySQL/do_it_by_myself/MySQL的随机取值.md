@@ -48,7 +48,7 @@ mysql> select word from words order by rand() limit 3;
 
 依旧对上述语句进行查询，通过修改参数保证当前查询会使用磁盘临时表。
 
-R存放的随机值是8个字节，rowid是6个字节，数据总行数是10000，那么算出来就有140000字节了，超过sort_buffer_size的定义了，但是查询结果使用的number_of_tmp_files值却是0
+R存放的随机值是8个字节，rowid是6个字节，数据总行数是10000，那么算出来就有140000字节了，超过**sort_buffer_size**的定义了，但是查询结果使用的number_of_tmp_files值却是0
 
 这个SQL语句排序确实没有用到临时文件，采用5.6新引入的排序（优先队列排序算法）。
 
