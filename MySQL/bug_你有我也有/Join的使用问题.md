@@ -193,3 +193,8 @@ join_buffer的大小是由参数**join_buffer_size**设定的，默认值是256K
 
 
 
+## 问题
+
+- left join
+  - 使用left join的时候，左边的表不一定是驱动表，需要left join的定义，就不能把被驱动表的字段放在where里面做等值判断活着不等值判断，必须都写在on里面。
+- join
