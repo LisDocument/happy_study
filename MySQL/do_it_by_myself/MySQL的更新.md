@@ -82,6 +82,8 @@ binlog会记录所有的逻辑操作，并且是采用**追加写**的的方式�
 
 binlog和redolog是通过XID关联的
 
+> MySQL内部维护了一个全局变量global_query_id，每次执行语句的时候将它赋值给Query_id，然后给这个变量+1，如果这个语句是这个事务的第一个语句，那么MySQL还会把这个Query_id赋给这个事务的XID。global_query_id是内存变量，重启后就清零了，所以不同事务之间有同一个XID是正常的，但是MySQL重启后会生成新的binlog文件，因此不会出现因为重启导致的同一个binlog中存在一个XID的。但是global_query_id到达最大值后会重新从0开始统计，这个可能会导致这个binlog文件中出现同一个事务用一个XID的情况
+
 ##### 最后数据写入的最终落盘，是从redo log更新过来的还是从buffer pool更新过来的呢
 
 **redolog并没有记录数据页的完整数据，他并没有能力自己去更新磁盘数据，也不存在数据最终落盘是由redolog更新过去的情况**
