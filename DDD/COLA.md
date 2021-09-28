@@ -38,3 +38,4 @@
 | Client SDK | api         | 服务对外透出的API               | 是   |
 | Client SDK | dto         | 服务对外的DTO                   | 是   |
 
+![image-20210928142735113](COLA.assets/image-20210928142735113.png)
