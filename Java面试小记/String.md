@@ -9,3 +9,15 @@
 | 不要使用stirng+                                              | 指定容量初始化                                       | 指定容量初始化                                               |
 | 执行速度快                                                   | 低于builder10%-15%                                   |                                                              |
 
+StringBuffer和StringBuilder在Java9后将内部的char数据修改为了byte数组实现。
+
+在Java9中是利用InvokeDynamic将字符串拼接的优化与javac生成的字节码解耦。
+
+**（-XX:+PrintStringTableStatistics）**打印字符串空间
+
+**（-XX:StringTableSize=N）**手动调整大小
+
+**（-XX:+UseStringDeduplication）**G1 GC下字符串的排重，会将相同数据的字符串指向同一份数据。
+
+Jdk1.8之后intern方法返回的String才是对应元空间地址的String
+
