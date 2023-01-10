@@ -10,5 +10,12 @@ sudo du -sh *
 # 删除后发现资源还没有释放，可以参考占用文件的某些进程没有关闭，仍然在占用，使用
 lsof | grep deleted 
 
+# 目录容量估算
+du -sh /opt
+
+# 以容量大小排序文件
+du -sk * |sort -rn
+
+
 ```
 
