@@ -8,6 +8,7 @@ ll -rt
 find ./ -name "*.o" -exec rm {} \;
 # 添加软连接（符号连接）， xx是软连接名称，xxx是实体文件
 ln -s xx xxx 
+cp -l xx xxx
 # 将标准输出和标准错误重定向到同一文件；nohup？
 ls  proc/*.c > list 2> &l
 ls  proc/*.c &> list

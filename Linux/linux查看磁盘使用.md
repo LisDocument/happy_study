@@ -16,6 +16,9 @@ du -sh /opt
 # 以容量大小排序文件
 du -sk * |sort -rn
 
+# 查询xfs磁盘情况
+xfs_info /opt
+
 
 ```
 
